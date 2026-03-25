@@ -31,9 +31,9 @@ export default function Home() {
             Ninefold Solutions is a <span className="text-primary-700">Ruby on Rails</span>{' '}
             consulting company
           </h1>
-          <p className="mb-8 text-lg font-normal text-gray-500 sm:px-16 lg:text-xl xl:px-48 dark:text-gray-400">
-            Here at Flowbite we focus on markets where technology, innovation, and capital can
-            unlock long-term value and drive economic growth.
+          <p className="mb-8 text-lg font-normal text-black sm:px-16 lg:text-xl xl:px-48 dark:text-gray-400">
+            Whether you're a startup looking to launch your MVP or an established company seeking to
+            enhance your existing application, we have the expertise to help you succeed.
           </p>
           <div className="mb-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <Link
@@ -57,7 +57,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-white dark:bg-gray-900">
+      {/* <section className="bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
           <div className="mb-8 max-w-screen-md">
             <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
@@ -191,9 +191,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section className="bg-white dark:bg-gray-900">
+      {/* <section className="bg-white dark:bg-gray-900">
         <div className="bg-white dark:bg-gray-900">
           <div className="mx-auto max-w-7xl py-8">
             <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-16 text-center shadow-2xl sm:rounded-3xl sm:px-16 dark:bg-gray-800 dark:shadow-none dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:inset-ring dark:after:inset-ring-white/10 dark:after:sm:rounded-3xl">
@@ -235,7 +235,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   )
 }
