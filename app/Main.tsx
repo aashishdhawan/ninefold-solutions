@@ -1,6 +1,6 @@
 import Link from '@/components/Link'
 
-export default function Home() {
+export default function Home({ posts }) {
   return (
     <>
       <section className="bg-white dark:bg-gray-900">
