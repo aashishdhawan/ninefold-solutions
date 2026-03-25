@@ -2079,6 +2079,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/inter@npm:4.5.2":
+  version: 4.5.2
+  resolution: "@fontsource/inter@npm:4.5.2"
+  checksum: 2fa5cb1827a83767b5b34ba829dc6e1ef9281becb1601e4f8083f95980a1fbed96db6f6f4f2a9c907e6228690577c5071e06465d72411f859b3eef4f0c520287
+  languageName: node
+  linkType: hard
+
 "@giscus/react@npm:^3.0.0":
   version: 3.1.0
   resolution: "@giscus/react@npm:3.1.0"
@@ -11580,6 +11587,7 @@ __metadata:
   dependencies:
     "@eslint/eslintrc": ^3.3.3
     "@eslint/js": ^9.18.0
+    "@fontsource/inter": 4.5.2
     "@headlessui/react": 2.2.9
     "@next/bundle-analyzer": 15.5.12
     "@svgr/webpack": ^8.1.0
