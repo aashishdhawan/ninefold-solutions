@@ -33,7 +33,8 @@ export default function Home({ posts }) {
           </h1>
           <p className="mb-8 text-lg font-normal text-black sm:px-16 lg:text-xl xl:px-48 dark:text-gray-400">
             Whether you're a startup looking to launch your MVP or an established company seeking to
-            enhance your existing application, we have the expertise to help you succeed.
+            enhance your existing Ruby on Rails application, we have the expertise to help you
+            succeed.
           </p>
           <div className="mb-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <Link
