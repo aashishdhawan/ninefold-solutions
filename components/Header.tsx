@@ -45,6 +45,11 @@ const Header = () => {
         <SearchButton />
         <MobileNav />
         <ThemeSwitch />
+        <div>
+          <div className="prose text-primary hover:text-primary dark:hover:text-primary ml-2 text-lg hover:underline">
+            <a href="/about">Talk to us →</a>
+          </div>
+        </div>
       </div>
     </header>
   )
