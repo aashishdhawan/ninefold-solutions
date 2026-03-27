@@ -13,7 +13,7 @@ const siteMetadata = {
   email: 'aashish@ninefold.solutions',
   x: 'https://twitter.com/aashish_dhawan',
   youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
+  linkedin: 'https://www.linkedin.com/in/aashishdhawan/',
   locale: 'en-US',
   // set to true if you want a navbar fixed to the top
   stickyNav: false,
