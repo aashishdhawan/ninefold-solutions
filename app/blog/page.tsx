@@ -80,7 +80,7 @@ export default async function BlogPage(props: { searchParams: Promise<{ page: st
         <div className="flex justify-end text-base leading-6 font-medium">
           <Link
             href="/blog"
-            className="text-primary-700 hover:text-primary-600 dark:hover:text-primary-400"
+            className="text-primary-700 hover:text-primary-600 dark:hover:text-primary-600"
             aria-label="All posts"
           >
             All Posts &rarr;

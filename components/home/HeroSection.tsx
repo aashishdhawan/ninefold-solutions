@@ -9,6 +9,7 @@ const HeroSection = () => {
           className="mb-7 inline-flex items-center justify-between rounded-full bg-gray-100 px-1 py-1 pr-4 text-sm text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
           role="alert"
         >
+          <br />
           <span className="bg-primary-700 mr-3 rounded-full px-4 py-1.5 text-xs text-white">
             New
           </span>{' '}
@@ -28,8 +29,16 @@ const HeroSection = () => {
         </Link>
         <h1 className="mb-4 text-4xl leading-none font-extrabold tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
           Ninefold Solutions is a{' '}
-          <span className="text-primary-700 dark:text-primary-400">Ruby on Rails</span> consulting
-          company
+          <span
+            className="bg-primary-700 m-0 rounded-lg bg-clip-text p-0 text-transparent"
+            id="typer"
+          >
+            Ruby on Rails
+          </span>
+          <span className="blink text-primary-700 font-extrabold" style={{ visibility: 'hidden' }}>
+            |
+          </span>{' '}
+          consulting company
         </h1>
         <p className="mb-8 text-lg font-normal text-gray-700 sm:px-16 lg:text-xl xl:px-48 dark:text-gray-300">
           Whether you're a startup looking to launch your MVP or an established company seeking to
