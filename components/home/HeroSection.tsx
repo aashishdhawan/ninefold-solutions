@@ -28,12 +28,12 @@ const HeroSection = () => {
           </svg>
         </Link>
         <h1 className="mb-4 text-4xl leading-none font-extrabold tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-          Ninefold Solutions is a{' '}
+          Ninefold Solutions is an{' '}
           <span
             className="bg-primary-700 m-0 rounded-lg bg-clip-text p-0 text-transparent"
             id="typer"
           >
-            Ruby on Rails
+            AI-augmented Ruby on Rails
           </span>
           <span className="blink text-primary-700 font-extrabold" style={{ visibility: 'hidden' }}>
             |
