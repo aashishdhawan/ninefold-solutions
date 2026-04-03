@@ -34,9 +34,6 @@ const HeroSection = () => {
             id="typer"
           >
             AI-augmented Ruby on Rails
-          </span>
-          <span className="blink text-primary-700 font-extrabold" style={{ visibility: 'hidden' }}>
-            |
           </span>{' '}
           consulting company
         </h1>
