@@ -1,8 +1,8 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Ninefold Solutions',
+  title: 'Ninefold Digital',
   author: 'Aashish Dhawan',
-  headerTitle: 'Ninefold Solutions',
+  headerTitle: 'Ninefold Digital',
   description: 'Sneak peak into what our team is doing',
   language: 'en-us',
   theme: 'system', // system, dark or light
