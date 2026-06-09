@@ -58,10 +58,47 @@ The `:only` option tells Rails to create only the specified routes, while The `:
 
 You can use the controller search option, `-c`, to view routes one controller at a time, and remove unused routes by restricting route creation. If cleaning up all unused routes in the application at once feels overwhelming, you can refactor the routes while working on a specific controller or while fixing bugs in a controller you can quickly scan for unused routes.
 
-## Removing used or incomplete features
+## Removing unused or incomplete features
 
 If you removed a feature in the past but didn’t clean up the routes file, or you have incomplete features you hope to complete someday but they aren’t a priority right now, you can remove that code along with the corresponding routes.
 
 ## Run in CI/CD Pipeline
 
 These commands can also be used in your CI/CD pipeline to prevent developers from adding unused routes to the codebase in the future. You can also add them to custom check scripts that verify unused routes before pushing code to repositories.
+
+## Limitations
+
+To understand what --unused isn’t—and what it shouldn’t be used for—let’s go back to the definition of an unused route
+
+> An `unused` route in Rails is a route that is defined in the config/routes.rb file but is not referenced by any controller action or view in your application
+
+and its implementation
+
+```ruby
+def unused?
+  controller_class_missing? || (action_missing? && template_missing?)
+end
+```
+
+1. The command checks whether a controller is missing, or whether both the action and template are missing. However, a controller, action, and template may all exist while the route is never used or called anywhere in the application. In that case, you can’t use the `--unused` command to identify dead code (controllers), because such routes won’t appear in the unused routes list—the condition `controller_class_missing? || (action_missing? && template_missing?)` is not satisfied. The command doesn’t verify whether a route is actually used in the project; it only ensures that a corresponding `controller#action` exists for the route definition.
+2. The command only checks routes defined in the config/routes.rb file. It does not find controllers or actions that aren’t referenced by any route. For example, obsolete code may exist in a controller even though no route is defined for it in routes.rb; the command won’t flag that controller. Hence you can not use `--unused` command to read a dead code/controller if a route for it does not exist in routes file.
+3. When dealing with nested controllers (controllers placed within modules or directories), the scanner can easily flag routes as "unused" if your routing configuration does not explicitly reflect the directory structure. In example below, `scope` is being used to correct directory structure to make `--unused` work properly, although you might not want to arrange directories as shown.
+
+```ruby
+# config/routes.rb
+# --unused might fails here
+resources :magazines do
+  resources :ads
+end
+
+# using scoped routes to correct directory structure
+resources :magazines do
+  scope module: :magazines do
+    resources :ads
+  end
+end
+```
+
+## Conclusion
+
+Using `--unused` command, we can identify unused routes and keep our routes file clean by removing extra routes. This specially becomes useful in large project where number of routes tend to grow. Although this command should not be used to find out all the dead code as explained above. Also before rails 7.1 we might have to use use a custom rake task or a gem like `traceroute` to identify unused routes.
