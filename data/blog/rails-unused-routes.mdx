@@ -14,7 +14,9 @@ layout: PostSimple
 
 Over time, large Rails applications, like other big projects, accumulate technical debt. One place this cruft often appears is the routes file. There are many reasons for this: you might remove a feature without cleaning up its routes, or you might leave an unfinished feature intending to complete it later. Cleaning up your routes file by removing dead or obsolete code is a good practice. In this blog post, we’ll see how to use `bin/rails routes --unused` command to identify such code and how can we get rid of it.
 
-## Rails routes —unused command
+<TOCInline toc={props.toc} exclude="Introduction" />
+
+## Rails routes —-unused command
 
 Rails provides `bin/rails routes --usused` command from Rails v7.1 onwards, which lists all _unused_ routes used in the application. According to [documentation](https://guides.rubyonrails.org/routing.html#listing-unused-routes), the definition of _unused_ is
 
@@ -29,3 +31,37 @@ end
 ```
 
 The definition and implementation are important to understand, as they clarify what this Rails command can and cannot do. We’ll also explore this command’s limitations and where it isn’t useful for refactoring or identifying dead code.
+
+Here is the result of the command when we ran it in one of our product codebase in [Best Talent](https://besttalent.io). It lists down 33 unused routes in our application. Depending on size of your application, this list can be bigger or shorter.
+
+![Output from bin/rails routes --unused](/static/images/rails-unused-routes/list.png)
+
+## Searching unused routes with search options
+
+If the list of routes is long, you can use rails route search options with this `--unused` command as well. Rails provides two options for route searches i.e. `-g` for grep option and `-c` for controller option.
+
+You can search through your routes with the grep option: `-g`. For example, unused POST routes can be found using `bin/rails routes --unused -g POST`.
+
+![Output from bin/rails routes --unused -g POST](/static/images/rails-unused-routes/post.png)
+
+Similarly `-c` option can be used to filter our controller specific unused routes. For example, here we are using controller search option to list all unused routes for a specific `contact` controller.
+![Output from bin/rails routes --unused -c contact](/static/images/rails-unused-routes/controller.png)
+More details about searching routes can be found on official rails [documentation](https://guides.rubyonrails.org/routing.html#searching-routes).
+
+Now that we can list unused routes—and can also search routes using the grep or controller options—let’s look at ways to remove them.
+
+## Restricting the Routes Created
+
+By default, using resources creates routes for the seven default actions (index, show, new, create, edit, update, and destroy). You can use the `:only` and `:except` options to limit which routes are created.
+
+The `:only` option tells Rails to create only the specified routes, while The `:except` option specifies a route or list of routes that Rails should not create.
+
+You can use the controller search option, `-c`, to view routes one controller at a time, and remove unused routes by restricting route creation.
+
+## Removing used or incomplete features
+
+If you removed a feature in the past but didn’t clean up the routes file, or you have incomplete features you hope to complete someday but they aren’t a priority right now, you can remove that code along with the corresponding routes.
+
+## Run in CI/CD Pipeline
+
+These commands can also be used in your CI/CD pipeline to prevent developers from adding unused routes to the codebase in the future. You can also add them to custom check scripts that verify unused routes before pushing code to repositories.
