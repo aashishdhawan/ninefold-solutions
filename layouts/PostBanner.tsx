@@ -27,7 +27,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
       <ScrollTopAndComment />
       <article>
         <div>
-          <div className="space-y-1 pb-10 text-center dark:border-gray-700">
+          <div className="space-y-1 pb-5 text-center md:pb-6 dark:border-gray-700">
             <div className="w-full">
               <Bleed>
                 <div className="relative aspect-2/1 w-full">
@@ -35,20 +35,25 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 </div>
               </Bleed>
             </div>
-            <div className="relative pt-10">
+            <div className="relative pt-5 md:pt-6">
               <PageTitle>{title}</PageTitle>
             </div>
           </div>
-          <div className="prose dark:prose-invert max-w-none py-4">{children}</div>
+          <div className="prose prose-compact-headings dark:prose-invert max-w-none py-3 md:py-4">
+            {children}
+          </div>
           {siteMetadata.comments && (
-            <div className="pt-6 pb-6 text-center text-gray-700 dark:text-gray-300" id="comment">
+            <div
+              className="pt-3 pb-3 text-center text-gray-700 md:pt-4 md:pb-4 dark:text-gray-300"
+              id="comment"
+            >
               <Comments slug={slug} />
             </div>
           )}
           <footer>
             <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
               {prev && prev.path && (
-                <div className="pt-4 xl:pt-8">
+                <div className="pt-2 xl:pt-4">
                   <Link
                     href={`/${prev.path}`}
                     className="text-primary-700 hover:text-primary-600 dark:hover:text-primary-600"
@@ -59,7 +64,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 </div>
               )}
               {next && next.path && (
-                <div className="pt-4 xl:pt-8">
+                <div className="pt-2 xl:pt-4">
                   <Link
                     href={`/${next.path}`}
                     className="text-primary-700 hover:text-primary-600 dark:hover:text-primary-600"

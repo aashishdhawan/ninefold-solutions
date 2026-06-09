@@ -118,6 +118,53 @@
       color: var(--color-gray-100);
     }
   }
+
+  .prose-compact-headings {
+    & :where(p) {
+      margin-top: 0.68em;
+      margin-bottom: 0.68em;
+    }
+
+    & :where(ul, ol) {
+      margin-top: 0.68em;
+      margin-bottom: 0.68em;
+    }
+
+    & :where(li) {
+      margin-top: 0.2em;
+      margin-bottom: 0.2em;
+    }
+
+    & :where(pre, blockquote) {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    & :where(hr) {
+      margin-top: 1.25em;
+      margin-bottom: 1.25em;
+    }
+
+    & :where(img) {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    & :where(h2) {
+      margin-top: 1em;
+      margin-bottom: 0.35em;
+    }
+
+    & :where(h3) {
+      margin-top: 0.85em;
+      margin-bottom: 0.3em;
+    }
+
+    & :where(h4) {
+      margin-top: 0.75em;
+      margin-bottom: 0.25em;
+    }
+  }
 }
 
 .task-list-item::before {

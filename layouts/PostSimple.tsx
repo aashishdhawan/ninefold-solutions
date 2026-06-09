@@ -22,10 +22,10 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
   return (
     <SectionContainer>
       <ScrollTopAndComment />
-      <article>
+      <article className="mx-auto max-w-4xl">
         <div>
           <header>
-            <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
+            <div className="space-y-1 border-b border-gray-200 pb-4 text-center md:pb-5 dark:border-gray-700">
               <dl>
                 <div>
                   <dt className="sr-only">Published on</dt>
@@ -39,21 +39,24 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
               </div>
             </div>
           </header>
-          <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 xl:divide-y-0 dark:divide-gray-700">
+          <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-4 md:pb-5 xl:divide-y-0 dark:divide-gray-700">
             <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
-              <div className="prose dark:prose-invert dark:prose-dark max-w-none pt-10 pb-8 text-lg font-medium tracking-tight text-black">
+              <div className="prose prose-compact-headings dark:prose-invert dark:prose-dark max-w-none pt-4 pb-4 text-lg font-medium tracking-tight text-black md:pt-6 md:pb-5">
                 {children}
               </div>
             </div>
             {siteMetadata.comments && (
-              <div className="pt-6 pb-6 text-center text-gray-700 dark:text-gray-300" id="comment">
+              <div
+                className="pt-3 pb-3 text-center text-gray-700 md:pt-4 md:pb-4 dark:text-gray-300"
+                id="comment"
+              >
                 <Comments slug={slug} />
               </div>
             )}
             <footer>
               <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
                 {prev && prev.path && (
-                  <div className="pt-4 xl:pt-8">
+                  <div className="pt-2 xl:pt-4">
                     <Link
                       href={`/${prev.path}`}
                       className="text-primary-700 hover:text-primary-600 dark:hover:text-primary-600"
@@ -64,7 +67,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   </div>
                 )}
                 {next && next.path && (
-                  <div className="pt-4 xl:pt-8">
+                  <div className="pt-2 xl:pt-4">
                     <Link
                       href={`/${next.path}`}
                       className="text-primary-700 hover:text-primary-600 dark:hover:text-primary-600"
