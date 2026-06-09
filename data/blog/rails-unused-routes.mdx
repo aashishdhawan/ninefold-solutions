@@ -12,22 +12,20 @@ layout: PostSimple
 
 ## Introduction
 
-This is a sample blog post to confirm your content setup is working.
+Over time, large Rails applications, like other big projects, accumulate technical debt. One place this cruft often appears is the routes file. There are many reasons for this: you might remove a feature without cleaning up its routes, or you might leave an unfinished feature intending to complete it later. Cleaning up your routes file by removing dead or obsolete code is a good practice. In this blog post, we’ll see how to use `bin/rails routes --unused` command to identify such code and how can we get rid of it.
 
-<TOCInline toc={props.toc} exclude="Introduction" />
+## Rails routes —unused command
 
-## Why this post exists
+Rails provides `bin/rails routes --usused` command from Rails v7.1 onwards, which lists all _unused_ routes used in the application. According to [documentation](https://guides.rubyonrails.org/routing.html#listing-unused-routes), the definition of _unused_ is
 
-- Verify Contentlayer picks up files from the `blog/` directory.
-- Confirm the blog listing and post page render correctly.
-- Provide a clean template you can duplicate for future posts.
+> An `unused` route in Rails is a route that is defined in the config/routes.rb file but is not referenced by any controller action or view in your application
 
-## What to customize next
+Additionally, if we look at the [source code](https://github.com/rails/rails/blob/main/railties/lib/rails/commands/unused_routes/unused_routes_command.rb#L20) for this command, we see a function named `unused?`, shown below, which essentially matches the definition above.
 
-1. Update the title, summary, and tags to match your topic.
-2. Replace this body content with your own writing.
-3. Add `images` or `canonicalUrl` frontmatter if needed.
+```ruby
+def unused?
+  controller_class_missing? || (action_missing? && template_missing?)
+end
+```
 
-## Quick tip
-
-If this post appears at `/blog/sample-post`, your content pipeline is set up correctly.
+The definition and implementation are important to understand, as they clarify what this Rails command can and cannot do. We’ll also explore this command’s limitations and where it isn’t useful for refactoring or identifying dead code.
