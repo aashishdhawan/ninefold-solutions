@@ -66,7 +66,7 @@ If you removed a feature in the past but didn’t clean up the routes file, or y
 
 These commands can also be used in your CI/CD pipeline to prevent developers from adding unused routes to the codebase in the future. You can also add them to custom check scripts that verify unused routes before pushing code to repositories.
 
-Here is an example of running `echo $?` to chech the response of the command. In first case when there are unused routes, the command `echo $?` returns with `1`, while in case of no unused routes, the command `echo $?` returns the response `0`.
+Here is an example of running `echo $?` to check the response of the command. In first case when there are unused routes, the command `echo $?` returns with `1`, while in case of no unused routes, the command `echo $?` returns the response `0`.
 
 ![Output from bin/rails routes --unused -g POST](/static/images/rails-unused-routes/ci-cd.png)
 
