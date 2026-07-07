@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import { slug } from 'github-slugger'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog } from 'contentlayer/generated'
+import type { Blog, Tips } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -15,9 +15,9 @@ interface PaginationProps {
   currentPage: number
 }
 interface ListLayoutProps {
-  posts: CoreContent<Blog>[]
+  posts: CoreContent<Blog | Tips>[]
   title: string
-  initialDisplayPosts?: CoreContent<Blog>[]
+  initialDisplayPosts?: CoreContent<Blog | Tips>[]
   pagination?: PaginationProps
 }
 
@@ -98,6 +98,16 @@ export default function ListLayoutWithTags({
                   className="hover:text-primary-700 dark:hover:text-primary-600 font-bold text-gray-700 uppercase dark:text-gray-300"
                 >
                   All Posts
+                </Link>
+              )}
+              {pathname.startsWith('/tips') ? (
+                <h3 className="text-primary-700 mt-2 font-bold uppercase">All Tips</h3>
+              ) : (
+                <Link
+                  href={`/tips`}
+                  className="hover:text-primary-700 dark:hover:text-primary-600 mt-2 block font-bold text-gray-700 uppercase dark:text-gray-300"
+                >
+                  All Tips
                 </Link>
               )}
               <ul>
