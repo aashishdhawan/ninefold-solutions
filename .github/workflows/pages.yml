@@ -33,7 +33,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/bun.lock') }}-
       - run: bun install --frozen-lockfile
-      - run: bun run build
+      - run: bun run build:strict
         env:
           EXPORT: 1
           UNOPTIMIZED: 1
