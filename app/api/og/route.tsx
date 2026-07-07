@@ -10,7 +10,13 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const titleParam = searchParams.get('title')
   const title = (titleParam || siteMetadata.title).slice(0, 140)
-  const logoUrl = `${siteMetadata.siteUrl}${process.env.BASE_PATH || ''}/static/images/ninefold-logo-full.png`
+  const titleLength = title.length
+  const titleFontSize = titleLength > 120 ? 54 : titleLength > 95 ? 62 : titleLength > 72 ? 70 : 82
+  const titleLineHeight = titleLength > 95 ? 1.12 : titleLength > 72 ? 1.08 : 1.04
+  const logoUrl = new URL(
+    `${process.env.BASE_PATH || ''}/static/images/ninefold-logo-full.png`,
+    request.url
+  ).toString()
 
   return new ImageResponse(
     <div
@@ -20,25 +26,38 @@ export async function GET(request: Request) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        padding: '56px',
-        background:
-          'radial-gradient(circle at 20% 10%, #f5f5f5 0%, #f0f4f8 30%, #e7eef6 60%, #dde7f3 100%)',
+        padding: '68px',
+        background: 'linear-gradient(160deg, #f8fafc 0%, #edf2f7 44%, #e3ebf4 100%)',
         color: '#0f172a',
-        fontFamily: 'Arial, sans-serif',
+        fontFamily: 'InterVariable, Inter, ui-sans-serif, system-ui, sans-serif',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-        <img src={logoUrl} alt="Ninefold Digital logo" width={72} height={72} />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          width: '100%',
+          minHeight: '96px',
+        }}
+      >
+        <img src={logoUrl} alt="Ninefold Digital logo" height={84} />
       </div>
 
       <div
         style={{
-          fontSize: 128,
-          lineHeight: 1.12,
+          display: 'flex',
+          alignItems: 'flex-start',
+          width: '100%',
+          marginTop: '44px',
+          fontSize: titleFontSize,
+          lineHeight: titleLineHeight,
           fontWeight: 900,
-          letterSpacing: '-0.03em',
+          fontVariationSettings: "'wght' 900",
+          letterSpacing: '-0.04em',
           maxWidth: '100%',
           overflow: 'hidden',
+          textShadow: '0 1px 0 rgba(15, 23, 42, 0.18), 0 2px 2px rgba(15, 23, 42, 0.08)',
         }}
       >
         {title}

@@ -211,7 +211,7 @@ export default makeSource({
       rehypeKatexNoTranslate,
       [rehypeCitation, { path: path.join(root, 'data') }],
       [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }],
-      rehypePresetMinify,
+      ...(isProduction ? [rehypePresetMinify] : []),
     ],
   },
   onSuccess: async (importData) => {
