@@ -52,14 +52,14 @@ export async function GET(request: Request) {
           marginTop: '44px',
           fontSize: titleFontSize,
           lineHeight: titleLineHeight,
-          fontWeight: 900,
-          fontVariationSettings: "'wght' 900",
+          fontWeight: 950,
+          fontVariationSettings: "'wght' 950",
           fontFamily: 'InterVariable, Inter, ui-sans-serif, system-ui, sans-serif',
-          letterSpacing: '-0.045em',
+          letterSpacing: '-0.05em',
           maxWidth: '100%',
           overflow: 'hidden',
           textShadow:
-            '0 1px 0 rgba(15, 23, 42, 0.26), 0 0 1px rgba(15, 23, 42, 0.2), 0 2px 2px rgba(15, 23, 42, 0.12)',
+            '0 1px 0 rgba(15, 23, 42, 0.3), 0 0 1px rgba(15, 23, 42, 0.24), 0 2px 3px rgba(15, 23, 42, 0.14)',
         }}
       >
         {title}
