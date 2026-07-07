@@ -54,10 +54,12 @@ export async function GET(request: Request) {
           lineHeight: titleLineHeight,
           fontWeight: 900,
           fontVariationSettings: "'wght' 900",
-          letterSpacing: '-0.04em',
+          fontFamily: 'InterVariable, Inter, ui-sans-serif, system-ui, sans-serif',
+          letterSpacing: '-0.045em',
           maxWidth: '100%',
           overflow: 'hidden',
-          textShadow: '0 1px 0 rgba(15, 23, 42, 0.18), 0 2px 2px rgba(15, 23, 42, 0.08)',
+          textShadow:
+            '0 1px 0 rgba(15, 23, 42, 0.26), 0 0 1px rgba(15, 23, 42, 0.2), 0 2px 2px rgba(15, 23, 42, 0.12)',
         }}
       >
         {title}
