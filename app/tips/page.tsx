@@ -36,7 +36,7 @@ export default async function TipsPage(props: { searchParams: Promise<{ page: st
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No tips found.'}
           {posts.slice(0, POSTS_PER_PAGE).map((post) => {
-            const { slug, date, title, summary, tags } = post
+            const { slug, date, title, tags } = post
             return (
               <li key={slug} className="py-4">
                 <article>
@@ -63,9 +63,6 @@ export default async function TipsPage(props: { searchParams: Promise<{ page: st
                               <Tag key={tag} text={tag} />
                             ))}
                           </div>
-                        </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                          {summary}
                         </div>
                       </div>
                     </div>
