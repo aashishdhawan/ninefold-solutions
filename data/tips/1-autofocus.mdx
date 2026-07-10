@@ -1,0 +1,79 @@
+---
+title: 'Tip #1: Use autofocus in rails forms to improve user experience'
+date: '2026-07-10'
+lastmod: '2026-07-10'
+tags: ['tips', 'ux']
+draft: false
+summary: 'How autofocus can improve user experience in rails forms'
+authors: ['default']
+layout: PostSimple
+---
+
+Imagine your Rails application has a form (like `/edit` or `/new`) and as soon as a user loads the page, a specific field of the form get selected and user starts typing in immediately. This is what `autofocus` does. It eliminates the need for users to click inside a form field before they start typing, thereby improving the user experience.
+
+Lets look at a form example from rails tutorial [Sign Up and Settings](https://guides.rubyonrails.org/sign_up_and_settings.html#sign-up-routes-controller) where the Signup form has a `first_name` text field which is marked as `autofocus: true`. Therefore as soon as user opens up a new Signup page, the `first_name` field is in focus and user starts typing in it without needing any extra click to select text field.
+
+```ruby {10}
+<h1>Sign Up</h1>
+
+<%= form_with model: @user, url: sign_up_path do |form| %>
+  <% if form.object.errors.any? %>
+    <div>Error: <%= form.object.errors.full_messages.first %></div>
+  <% end %>
+
+  <div>
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, required: true, autofocus: true, autocomplete: "given-name" %>
+  </div>
+
+  <div>
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, required: true, autocomplete: "family-name" %>
+  </div>
+
+  <div>
+    <%= form.label :email_address %>
+    <%= form.email_field :email_address, required: true, autocomplete: "email" %>
+  </div>
+
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password, required: true, autocomplete: "new-password" %>
+  </div>
+
+  <div>
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
+  </div>
+
+  <div>
+    <%= form.submit "Sign up" %>
+  </div>
+<% end %>
+```
+
+### Syntax
+
+To make a field auto focused, we just need to add `autofocus: true` attribute to the field.
+
+```ruby
+<%= form.text_field :first_name, required: true, autofocus: true, autocomplete: "given-name" %>
+```
+
+This will generate following HTML.
+
+```HTML
+<input required="required" autofocus="autofocus" autocomplete="given-name" type="text" name="first_name" id="first_name">
+```
+
+Rails adds `autofocus="autofocus"` instead of the minimized `autofocus` primarily for strict XHTML compatibility. While modern HTML5 allows boolean attributes to just exist, XML requires every attribute to have a explicitly stated value. By default, [TagHelpers](https://github.com/rails/rails/blob/v4.1.6/actionview/lib/action_view/helpers/tag_helper.rb) in rails generate XHTML compliant tags. For [boolean tags](https://github.com/rails/rails/blob/v4.1.6/actionview/lib/action_view/helpers/tag_helper.rb#L165) they generate `key="key"` output, therefore generating `autofocus="autofocus"` attribute.
+
+### Things to consider
+
+1. **Edit Forms:** Adding autofocus to a prefilled edit form is generally `not recommended`, but it depends on the context. You never know which field the user wants to edit, therefore making one specific field in autofocus in not the desired behavior.
+2. On mobile devices it can cause virtual keyboard to open up. This blocks the view of the rest of the form and user might have to manually dismiss it first, adding extra effort.
+3. For visually impaired users, it can disorient them by shifting their focus away from top of the page and thereby making it difficult to understand the context of the form.
+4. Sometimes on prefilled field, you want cursor at then **end** of the existing text rather than in beginning or selecting all of it. For this to happen, you might have to write custom code.
+5. You do not want standard tab navigation to break for users by using the `Tab` key.
+6. If the user submits the form and there is some error highlighting on that field, you do not want this behavior to break when page reloads.
+7. You do not want accidental overwrites which can happen if autofocus captures accidental keystrokes.
