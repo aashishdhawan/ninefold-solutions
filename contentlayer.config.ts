@@ -28,6 +28,7 @@ import prettier from 'prettier'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
+const isFastDev = process.env.FAST_DEV === '1'
 
 // heroicon mini link
 const icon = fromHtmlIsomorphic(
@@ -76,11 +77,20 @@ async function createTagCount(allPosts) {
       })
     }
   })
+  if (isFastDev) {
+    writeFileSync('./app/tag-data.json', `${JSON.stringify(tagCount, null, 2)}\n`)
+    return
+  }
+
   const formatted = await prettier.format(JSON.stringify(tagCount, null, 2), { parser: 'json' })
   writeFileSync('./app/tag-data.json', formatted)
 }
 
 function createSearchIndex(allPosts) {
+  if (isFastDev) {
+    return
+  }
+
   if (
     siteMetadata?.search?.provider === 'kbar' &&
     siteMetadata.search.kbarConfig.searchDocumentsPath
@@ -207,10 +217,9 @@ export default makeSource({
           content: icon,
         },
       ],
-      rehypeKatex,
-      rehypeKatexNoTranslate,
-      [rehypeCitation, { path: path.join(root, 'data') }],
-      [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }],
+      ...(isFastDev ? [] : [rehypeKatex, rehypeKatexNoTranslate]),
+      ...(isFastDev ? [] : [[rehypeCitation, { path: path.join(root, 'data') }]]),
+      ...(isFastDev ? [] : [[rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }]]),
       ...(isProduction ? [rehypePresetMinify] : []),
     ],
   },

@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "cross-env NEXT_DIST_DIR=.next-dev node ./scripts/dev-next.mjs",
-    "dev": "cross-env INIT_CWD=$PWD NEXT_DIST_DIR=.next-dev node ./scripts/dev-next.mjs",
+    "dev": "cross-env FAST_DEV=1 NEXT_PREWARM=1 INIT_CWD=$PWD NEXT_DIST_DIR=.next-dev node ./scripts/dev-next.mjs",
+    "dev:full": "cross-env INIT_CWD=$PWD NEXT_DIST_DIR=.next-dev node ./scripts/dev-next.mjs",
+    "dev:clean": "cross-env NEXT_CLEAN=1 INIT_CWD=$PWD NEXT_DIST_DIR=.next-dev node ./scripts/dev-next.mjs",
     "build": "cross-env FAST_BUILD=1 INIT_CWD=$PWD node ./scripts/build-next.mjs --debug && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
     "build:strict": "cross-env INIT_CWD=$PWD node ./scripts/build-next.mjs --debug && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
     "build:fast": "cross-env FAST_BUILD=1 INIT_CWD=$PWD node ./scripts/build-next.mjs --debug && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
