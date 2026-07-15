@@ -1,0 +1,38 @@
+---
+title: 'Tip #2: Autocomplete attribute, the less common parts'
+date: '2026-07-15'
+lastmod: '2026-07-15'
+tags: ['tips', 'ux']
+draft: false
+summary: 'Understanding less knows parts of automcomplete'
+authors: ['default']
+layout: PostSimple
+---
+
+The `autocomplete` HTML attribute tells user agents/browsers how to, or indeed whether to auto fill form fields. For example, we could have an rails form where an autocomplete is being used to autofill `email` field like this
+
+```ruby
+<%= form.text_field :email, "Email", autocomplete: "email" %>
+```
+
+The value of attribute `autocomplete` can be `on`, `off` or space-separated list of tokens (`<token-list>`). Here are some less used/knows parts of autocomplete attribute.
+
+1. When the autocomplete is set to `on`, the user agent is allowed to automatically complete the input, however no guidance is provided as to the type of data expected and is left to user agent to make its own judgement.
+2. `off` tell the user agent not to autofill this form and the user will therefore have to explicitly enter the data each time.
+3. When the value for autocomplete is selected either `on` or `off` not other space separated token can be added. `1` is maximum number of token allowed.
+4. You can not use any arbitrary value for autocomplete token and it has to be an `ASCII case-insensitive` match for a predefined set of tokens. For example, `autocomplete: 'email_address'` is not permitted, while `autocomplete: 'email'` is, since `email` is a predefined token. [Here](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete#token_list_tokens) is the list of predefined tokens.
+5. `first_name` and `last_name` are not accepted tokens. Instead, `given_name` and `family_name` should be used.
+6. If same set of tokens are used on a field, user agent will autofill all such fields with same value.
+7. Some tokens may be used more than once with potentially different expected values, such as the postal-code token in a form that contains both shipping and billing addresses. Including multiple different tokens in a space-separated list causes the associated form controls to be given unique autocomplete values: in this case, `autocomplete="shipping postal-code"` and `autocomplete="billing postal-code"`.
+8. Some autocomplete values may need to be re-used multiple times. For example, a form may contain multiple shipping addresses and therefore multiple occurrences of `shipping postal-code` while still expecting different values. To make the autocomplete value unique in these cases, the first token in the space-separated list of tokens can be a section-_ token, where the token's first eight characters are always the string `section-`, followed by an alphanumeric string. All form fields given the section-_ token with the same alphanumeric string belong to the same named group. For example, if there are two shipping addresses in the form, then they could be marked up as:
+
+```HTML
+<fieldset>
+ <legend>Ship the blue gift to...</legend>
+ <p> <label> Postal Code: <input name=bp autocomplete="section-blue shipping postal-code"> </label>
+</fieldset>
+<fieldset>
+ <legend>Ship the red gift to...</legend>
+ <p> <label> Postal Code: <input name=rp autocomplete="section-red shipping postal-code"> </label>
+</fieldset>
+```
